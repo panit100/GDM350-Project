@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnBullet : MonoBehaviour
 {
+    public string BulletName = null;
     BulletPool bulletPool;
 
     private void Start() {
@@ -13,7 +14,7 @@ public class SpawnBullet : MonoBehaviour
     void FixedUpdate()
     {
         if(Input.GetKey(KeyCode.Space)){
-            bulletPool.SpawnFromPool("Bullet",transform.position);
+            bulletPool.SpawnFromPool(BulletName,transform.position);
         }
     }
 }

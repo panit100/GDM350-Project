@@ -252,6 +252,9 @@ MonoBehaviour:
     prefab: {fileID: 6164300471798020120, guid: afca9bb6592291b4c9ace27aa658c9bc,
       type: 3}
     size: 100
+  - tag: SpacialBullet
+    prefab: {fileID: 929360117543052337, guid: 951543b9f5067544aab69d3262806d85, type: 3}
+    size: 100
 --- !u!1 &1634037751
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +356,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.7552143
+  m_Radius: 1.6731272
 --- !u!114 &1634037755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,3 +425,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf84bd1ef3b35e4bb6ca6ddc1502e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletName: Bullet
