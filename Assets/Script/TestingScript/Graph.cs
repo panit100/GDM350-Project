@@ -9,6 +9,10 @@ public class Graph : MonoBehaviour
 
     [SerializeField,Range(10,100)]
     int resolution = 10;
+    [SerializeField,Range(1,100)]
+    int speed = 1;
+    [SerializeField,Range(0,1)]
+    int Invert = 0;
 
     [SerializeField]
     FunctionLibrary.FunctionName function = default;
@@ -38,12 +42,20 @@ public class Graph : MonoBehaviour
     void Update()
     {
         FunctionLibrary.Function f = FunctionLibrary.GetFunction(function);
+        
+        
 
         float time = Time.time;
         for(int i = 0; i< points.Length; i++)
         {
             Transform point = points[i];
             Vector3 position = point.localPosition;
+
+            if(Invert == 0){
+                position.x += (speed * Time.deltaTime);
+            }else{
+                position.x -= (speed * Time.deltaTime);
+            }
 
             position.y = f(position.x,time);
 

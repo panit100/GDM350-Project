@@ -7,18 +7,12 @@ public class Bullet : MonoBehaviour
     Vector2 moveDirection;
     float moveSpeed = 5f;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 
-    void SetMoveDirection(Vector2 dir){
+    public void SetMoveDirection(Vector2 dir){
         moveDirection = dir;
     }
 
@@ -32,5 +26,9 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet(){
         gameObject.SetActive(false);
+    }
+
+    public float MoveSpeed{
+        set{ moveSpeed = value;}
     }
 }

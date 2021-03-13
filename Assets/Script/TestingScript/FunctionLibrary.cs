@@ -3,11 +3,24 @@ using static UnityEngine.Mathf;
 public static class FunctionLibrary
 {
     public delegate float Function(float x, float t);
-    public enum FunctionName {Wave,MultiWave,Ripple};
-    static Function[] functions = {Wave,MultiWave,Ripple};
+    public enum FunctionName {TestFunction,IncreaseLine,DecreaseLine,Wave,MultiWave,Ripple};
+    static Function[] functions = {TestFunction,IncreaseLine,DecreaseLine,Wave,MultiWave,Ripple};
 
     public static Function GetFunction(FunctionName name){
         return functions[(int)name];
+    }
+
+    public static float TestFunction(float x,float t){
+        float y = (x * Sin((x+t)*(x+t))) + 1;
+        return y * 2; 
+    }
+
+    public static float IncreaseLine(float x,float t){
+        return x; 
+    }
+
+    public static float DecreaseLine(float x,float t){
+        return x; 
     }
 
     public static float Wave(float x, float t){

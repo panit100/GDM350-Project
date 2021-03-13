@@ -236,6 +236,8 @@ MonoBehaviour:
   pointPrefab: {fileID: 4651388798443906288, guid: f21a5eb00dc26fe4d902bf9f806346c3,
     type: 3}
   resolution: 50
+  speed: 2
+  Invert: 0
   function: 0
 --- !u!4 &1771216688
 Transform:

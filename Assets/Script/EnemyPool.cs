@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPool : MonoBehaviour
+public class EnemyPool : MonoBehaviour
 {
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
@@ -15,7 +15,7 @@ public class BulletPool : MonoBehaviour
     }    
 
     #region  Singleton
-    public static BulletPool Instance;
+    public static EnemyPool Instance;
     
     private void Awake() {
         Instance = this;
@@ -30,7 +30,7 @@ public class BulletPool : MonoBehaviour
 
             for(int i = 0; i < pool.size; i++){
                 GameObject obj = Instantiate(pool.prefab);
-                obj.transform.parent = GameObject.Find("BulletPooler").transform;
+                obj.transform.parent = GameObject.Find("EnemyPooler").transform;
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -54,6 +54,4 @@ public class BulletPool : MonoBehaviour
 
         return objectToSpawn;
     }
-
-    
 }
