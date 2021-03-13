@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
+            //Do Damage to player
             Destroy(gameObject);
         }
     }
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
         CancelInvoke();
     }
 
-    void DestroyBullet(){
+    public void DestroyBullet(){
         Destroy(gameObject);
     }
 
@@ -48,6 +49,16 @@ public class Enemy : MonoBehaviour
             SetMoveDirection(enemyController.wayPoint2[randomNextPosition].position);
         }
         
+        if(transform.position.x == enemyController.wayPoint2[0].position.x){
+            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
+            SetMoveDirection(enemyController.wayPoint3[randomNextPosition].position);
+        }
+
+        if(transform.position.x == enemyController.wayPoint3[0].position.x){
+            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
+            SetMoveDirection(enemyController.endPoint[randomNextPosition].position);
+        }
+
         // if(transform.position.x == enemyController.wayPoint2[0].position.x){
         //     int randPoint = Random.Range(0,1);
         //     int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
@@ -60,15 +71,6 @@ public class Enemy : MonoBehaviour
         //             break;
         //     }
         // }
-        if(transform.position.x == enemyController.wayPoint2[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-            SetMoveDirection(enemyController.wayPoint3[randomNextPosition].position);
-        }
-
-        if(transform.position.x == enemyController.wayPoint3[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-            SetMoveDirection(enemyController.endPoint[randomNextPosition].position);
-        }
     }
     
 }

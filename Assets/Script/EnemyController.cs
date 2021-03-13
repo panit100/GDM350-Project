@@ -10,13 +10,15 @@ public class EnemyController : MonoBehaviour
         public Transform enemyPrefab;
         public float enemySpeed;
         public int enemyCount;
-        public float spawnRate;
+        public float spawnTime;
     }
     private enum EnemySpawnStep{
         StartDelay,StartSpawn,Waiting
     }
     EnemyPool enemyPool;
     EnemySpawnStep enemySpawnStep;
+
+    public float Timer = 0;
 
     [Header("WayPoint")]
     public Transform[] startPoint;
@@ -34,29 +36,32 @@ public class EnemyController : MonoBehaviour
 
     int randomStartPoint;
     int randomNextPosition;
+    bool isRandom = false;
 
     private void Start() {
         enemyPool = EnemyPool.Instance;
-        randomStartPoint = Random.Range(0,startPoint.Length);
-        randomNextPosition = Random.Range(0,wayPoint1.Length);
+        
     }
     void Update()
     {
-        if(enemySets[0].enemyCount > 0){
-            UpdateSpawnStep();
+        Timer += Time.deltaTime;
+        foreach(EnemySet enemy in enemySets){
+            Spawn(enemy,enemy.spawnTime);
         }
+
+        
     }
 
-    void SpawnEnemy(){
-        GameObject enemy = Instantiate(enemySets[0].enemyPrefab.gameObject,startPoint[randomStartPoint]);
-        enemy.GetComponent<Enemy>().MoveSpeed = enemySets[0].enemySpeed;
+    void SpawnEnemy(EnemySet enemySet){
+        GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,startPoint[randomStartPoint]);
+        enemy.GetComponent<Enemy>().MoveSpeed = enemySet.enemySpeed;
         enemy.GetComponent<Enemy>().SetMoveDirection(wayPoint1[randomNextPosition].position);
 
-        enemySets[0].enemyCount--;
+        enemySet.enemyCount--;
     }
 
     
-    void UpdateSpawnStep(){
+    void UpdateSpawnStep(EnemySet enemySet){
         if(enemySpawnStep == EnemySpawnStep.StartDelay){
             if(delayLoopTimer > 0f){
                 delayLoopTimer -= Time.deltaTime;
@@ -68,7 +73,7 @@ public class EnemyController : MonoBehaviour
         }
 
         if(enemySpawnStep == EnemySpawnStep.StartSpawn){
-            SpawnEnemy();
+            SpawnEnemy(enemySet);
 
             delayLoopTimer = delayLoopTime;
             enemySpawnStep = EnemySpawnStep.Waiting;
@@ -79,9 +84,24 @@ public class EnemyController : MonoBehaviour
                 enemySpawnStep = EnemySpawnStep.StartDelay;
             }
         }
-    
-        
     }
 
-    
+    void Spawn(EnemySet enemySet,float time){
+        if(Timer > time){
+            if(!isRandom){
+                randomStartPoint = Random.Range(0,startPoint.Length);
+                randomNextPosition = Random.Range(0,wayPoint1.Length);
+                isRandom = !isRandom;
+            }
+
+            if(enemySet.enemyCount > 0){
+                UpdateSpawnStep(enemySet);
+                
+            }else if(enemySet.enemyCount == 0){
+                isRandom = !isRandom;
+                enemySet.enemyCount--;
+            }
+        }
+        
+    }
 }

@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5675e209d94db64e8eb9c3b50e43ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Timer: 0
   startPoint:
   - {fileID: 250822105}
   - {fileID: 1488401909}
@@ -858,7 +859,13 @@ MonoBehaviour:
       type: 3}
     enemySpeed: 0.05
     enemyCount: 10
-    spawnRate: 0
+    spawnTime: 0
+  - enemyName: Normal2
+    enemyPrefab: {fileID: 7439243267241809383, guid: 9f938fa6a79805f4ebf7c58dc1a63101,
+      type: 3}
+    enemySpeed: 0.05
+    enemyCount: 10
+    spawnTime: 10
   delayLoopTimer: 0
   delayLoopTime: 0.5
 --- !u!1 &1732531524

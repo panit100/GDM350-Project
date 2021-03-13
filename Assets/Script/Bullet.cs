@@ -12,6 +12,12 @@ public class Bullet : MonoBehaviour
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Enemy"){
+            other.gameObject.GetComponent<Enemy>().DestroyBullet();
+        }
+    }
+
     public void SetMoveDirection(Vector2 dir){
         moveDirection = dir;
     }
