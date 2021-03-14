@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position,nextPosition,moveSpeed);
+        transform.rotation = Quaternion.identity;
         CheckWayPoint();
     }
 
@@ -44,19 +45,19 @@ public class Enemy : MonoBehaviour
     void CheckWayPoint(){
         EnemyController enemyController = FindObjectOfType<EnemyController>();
         
-        if(transform.position.x == enemyController.wayPoint1[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-            SetMoveDirection(enemyController.wayPoint2[randomNextPosition].position);
+        if(transform.position.x == enemyController.wayPoints[1].randomPoint[0].position.x){
+            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
+            SetMoveDirection(enemyController.wayPoints[2].randomPoint[randomNextPosition].position);
         }
         
-        if(transform.position.x == enemyController.wayPoint2[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-            SetMoveDirection(enemyController.wayPoint3[randomNextPosition].position);
+        if(transform.position.x == enemyController.wayPoints[2].randomPoint[0].position.x){
+            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
+            SetMoveDirection(enemyController.wayPoints[3].randomPoint[randomNextPosition].position);
         }
 
-        if(transform.position.x == enemyController.wayPoint3[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-            SetMoveDirection(enemyController.endPoint[randomNextPosition].position);
+        if(transform.position.x == enemyController.wayPoints[2].randomPoint[0].position.x){
+            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
+            SetMoveDirection(enemyController.wayPoints[4].randomPoint[randomNextPosition].position);
         }
 
         // if(transform.position.x == enemyController.wayPoint2[0].position.x){

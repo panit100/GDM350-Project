@@ -11,6 +11,13 @@ public class EnemyController : MonoBehaviour
         public float enemySpeed;
         public int enemyCount;
         public float spawnTime;
+        public bool isRandomPoint;
+        public List<Transform> wayPoint;
+    }
+    [System.Serializable]
+    public class WayPoint{
+        public string wayPointName;
+        public List<Transform> randomPoint;
     }
     private enum EnemySpawnStep{
         StartDelay,StartSpawn,Waiting
@@ -21,11 +28,7 @@ public class EnemyController : MonoBehaviour
     public float Timer = 0;
 
     [Header("WayPoint")]
-    public Transform[] startPoint;
-    public Transform[] endPoint;
-    public Transform[] wayPoint1;
-    public Transform[] wayPoint2;
-    public Transform[] wayPoint3;
+    public WayPoint[] wayPoints;
 
 
     [Header("SpawnLoopStep")]
@@ -53,9 +56,9 @@ public class EnemyController : MonoBehaviour
     }
 
     void SpawnEnemy(EnemySet enemySet){
-        GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,startPoint[randomStartPoint]);
+        GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,wayPoints[0].randomPoint[randomStartPoint]);
         enemy.GetComponent<Enemy>().MoveSpeed = enemySet.enemySpeed;
-        enemy.GetComponent<Enemy>().SetMoveDirection(wayPoint1[randomNextPosition].position);
+        enemy.GetComponent<Enemy>().SetMoveDirection(wayPoints[1].randomPoint[randomNextPosition].position);
 
         enemySet.enemyCount--;
     }
@@ -89,8 +92,8 @@ public class EnemyController : MonoBehaviour
     void Spawn(EnemySet enemySet,float time){
         if(Timer > time){
             if(!isRandom){
-                randomStartPoint = Random.Range(0,startPoint.Length);
-                randomNextPosition = Random.Range(0,wayPoint1.Length);
+                randomStartPoint = Random.Range(0,wayPoints[0].randomPoint.Count);
+                randomNextPosition = Random.Range(0,wayPoints[0].randomPoint.Count);
                 isRandom = !isRandom;
             }
 
@@ -103,5 +106,9 @@ public class EnemyController : MonoBehaviour
             }
         }
         
+    }
+
+    void RandomWayPoint(){
+
     }
 }

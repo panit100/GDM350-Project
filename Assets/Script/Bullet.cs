@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnBecameInvisible() {
-        Invoke("DestroyBullet",3f);
+        DestroyBullet();
     }
 
     private void OnBecameVisible() {
