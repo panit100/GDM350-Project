@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     [System.Serializable]
     public class EnemySet{

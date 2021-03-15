@@ -8,9 +8,9 @@ public class Enemy : MonoBehaviour
     Vector2 nextPosition;
     float moveSpeed = 5f;
     public int EnemySetIndex;
-    EnemyController enemyController;
+    EnemyManager enemyManager;
     private void Awake() {
-        enemyController = FindObjectOfType<EnemyController>();
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     void Update()
@@ -48,15 +48,15 @@ public class Enemy : MonoBehaviour
     }
 
     void CheckWayPoint(){
-        foreach(Transform n in enemyController.enemySets[EnemySetIndex].PattenPoint){
+        foreach(Transform n in enemyManager.enemySets[EnemySetIndex].PattenPoint){
             if(transform.position == n.position){
                 
-                int currentPoint = enemyController.enemySets[EnemySetIndex].PattenPoint.IndexOf(n);
+                int currentPoint = enemyManager.enemySets[EnemySetIndex].PattenPoint.IndexOf(n);
                 print(currentPoint);
-                if(currentPoint == enemyController.enemySets[EnemySetIndex].PattenPoint.Count - 1){
+                if(currentPoint == enemyManager.enemySets[EnemySetIndex].PattenPoint.Count - 1){
                     return;
                 }
-                SetMoveDirection(enemyController.enemySets[EnemySetIndex].PattenPoint[++currentPoint].position);
+                SetMoveDirection(enemyManager.enemySets[EnemySetIndex].PattenPoint[++currentPoint].position);
             }
         }
 
