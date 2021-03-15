@@ -7,12 +7,17 @@ public class Enemy : MonoBehaviour
     public int Damage;
     Vector2 nextPosition;
     float moveSpeed = 5f;
-    
+    public int EnemySetIndex;
+    EnemyController enemyController;
+    private void Awake() {
+        enemyController = FindObjectOfType<EnemyController>();
+    }
 
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position,nextPosition,moveSpeed);
         transform.rotation = Quaternion.identity;
+        
         CheckWayPoint();
     }
 
@@ -27,14 +32,14 @@ public class Enemy : MonoBehaviour
         nextPosition = dir;
     }
     private void OnBecameInvisible() {
-        Invoke("DestroyBullet",1.5f);
+        Invoke("DestroyEnemy",1.5f);
     }
 
     private void OnBecameVisible() {
         CancelInvoke();
     }
 
-    public void DestroyBullet(){
+    public void DestroyEnemy(){
         Destroy(gameObject);
     }
 
@@ -43,35 +48,19 @@ public class Enemy : MonoBehaviour
     }
 
     void CheckWayPoint(){
-        EnemyController enemyController = FindObjectOfType<EnemyController>();
-        
-        if(transform.position.x == enemyController.wayPoints[1].randomPoint[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
-            SetMoveDirection(enemyController.wayPoints[2].randomPoint[randomNextPosition].position);
-        }
-        
-        if(transform.position.x == enemyController.wayPoints[2].randomPoint[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
-            SetMoveDirection(enemyController.wayPoints[3].randomPoint[randomNextPosition].position);
-        }
-
-        if(transform.position.x == enemyController.wayPoints[2].randomPoint[0].position.x){
-            int randomNextPosition = Random.Range(0,enemyController.wayPoints[1].randomPoint.Count);
-            SetMoveDirection(enemyController.wayPoints[4].randomPoint[randomNextPosition].position);
+        foreach(Transform n in enemyController.enemySets[EnemySetIndex].PattenPoint){
+            if(transform.position == n.position){
+                
+                int currentPoint = enemyController.enemySets[EnemySetIndex].PattenPoint.IndexOf(n);
+                print(currentPoint);
+                if(currentPoint == enemyController.enemySets[EnemySetIndex].PattenPoint.Count - 1){
+                    return;
+                }
+                SetMoveDirection(enemyController.enemySets[EnemySetIndex].PattenPoint[++currentPoint].position);
+            }
         }
 
-        // if(transform.position.x == enemyController.wayPoint2[0].position.x){
-        //     int randPoint = Random.Range(0,1);
-        //     int randomNextPosition = Random.Range(0,enemyController.wayPoint1.Length);
-        //     switch(randPoint){
-        //         case 0 :
-        //             SetMoveDirection(enemyController.wayPoint1[randomNextPosition].position);
-        //             break;
-        //         case 1 :
-        //             SetMoveDirection(enemyController.wayPoint3[randomNextPosition].position);
-        //             break;
-        //     }
-        // }
+        
     }
     
 }

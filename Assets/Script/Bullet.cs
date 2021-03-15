@@ -14,7 +14,8 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Enemy"){
-            other.gameObject.GetComponent<Enemy>().DestroyBullet();
+            other.gameObject.GetComponent<Enemy>().DestroyEnemy();
+            DestroyBullet();
         }
     }
 

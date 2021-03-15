@@ -841,26 +841,6 @@ MonoBehaviour:
     - {fileID: 1526188787}
     - {fileID: 784080909}
     - {fileID: 1798251918}
-  startPoint:
-  - {fileID: 250822105}
-  - {fileID: 1488401909}
-  - {fileID: 630230512}
-  endPoint:
-  - {fileID: 1526188787}
-  - {fileID: 784080909}
-  - {fileID: 1798251918}
-  wayPoint1:
-  - {fileID: 1584746146}
-  - {fileID: 864084908}
-  - {fileID: 710258438}
-  wayPoint2:
-  - {fileID: 1037561242}
-  - {fileID: 808250786}
-  - {fileID: 1732531525}
-  wayPoint3:
-  - {fileID: 866394685}
-  - {fileID: 1584991759}
-  - {fileID: 497418661}
   enemySets:
   - enemyName: Normal
     enemyPrefab: {fileID: 7439243267241809383, guid: 9f938fa6a79805f4ebf7c58dc1a63101,
@@ -868,14 +848,26 @@ MonoBehaviour:
     enemySpeed: 0.05
     enemyCount: 10
     spawnTime: 0
-    randomPoint: []
+    delayTime: 5
+    isRandomPoint: 0
+    PattenPoint:
+    - {fileID: 250822105}
+    - {fileID: 1584746146}
+    - {fileID: 1037561242}
+    - {fileID: 866394685}
+    - {fileID: 497418661}
+    - {fileID: 784080909}
   - enemyName: Normal2
     enemyPrefab: {fileID: 7439243267241809383, guid: 9f938fa6a79805f4ebf7c58dc1a63101,
       type: 3}
     enemySpeed: 0.05
     enemyCount: 10
     spawnTime: 10
-    randomPoint: []
+    delayTime: 5
+    isRandomPoint: 0
+    PattenPoint:
+    - {fileID: 250822105}
+    - {fileID: 1526188787}
   delayLoopTimer: 0
   delayLoopTime: 0.5
 --- !u!1 &1732531524

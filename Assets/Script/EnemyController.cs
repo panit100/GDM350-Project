@@ -11,8 +11,9 @@ public class EnemyController : MonoBehaviour
         public float enemySpeed;
         public int enemyCount;
         public float spawnTime;
+        public float delayTime;
         public bool isRandomPoint;
-        public List<Transform> wayPoint;
+        public List<Transform> PattenPoint;
     }
     [System.Serializable]
     public class WayPoint{
@@ -36,29 +37,23 @@ public class EnemyController : MonoBehaviour
     public float delayLoopTimer = 0;
     public float delayLoopTime = 3; //ตั้งความเร็วการเกิดรอบต่อไป
 
+    int currentEnemy = 0;
 
-    int randomStartPoint;
-    int randomNextPosition;
-    bool isRandom = false;
-
-    private void Start() {
+    private void Awake() {
         enemyPool = EnemyPool.Instance;
-        
     }
-    void Update()
+    void FixedUpdate()
     {
-        Timer += Time.deltaTime;
         foreach(EnemySet enemy in enemySets){
-            Spawn(enemy,enemy.spawnTime);
+            Spawn();
         }
-
-        
     }
 
     void SpawnEnemy(EnemySet enemySet){
-        GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,wayPoints[0].randomPoint[randomStartPoint]);
+        GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,enemySet.PattenPoint[0]);
+        enemy.GetComponent<Enemy>().EnemySetIndex = enemySets.IndexOf(enemySet);
         enemy.GetComponent<Enemy>().MoveSpeed = enemySet.enemySpeed;
-        enemy.GetComponent<Enemy>().SetMoveDirection(wayPoints[1].randomPoint[randomNextPosition].position);
+        enemy.GetComponent<Enemy>().SetMoveDirection(enemySet.PattenPoint[1].position);
 
         enemySet.enemyCount--;
     }
@@ -89,26 +84,27 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Spawn(EnemySet enemySet,float time){
-        if(Timer > time){
-            if(!isRandom){
-                randomStartPoint = Random.Range(0,wayPoints[0].randomPoint.Count);
-                randomNextPosition = Random.Range(0,wayPoints[0].randomPoint.Count);
-                isRandom = !isRandom;
-            }
+    void Spawn(){
+        if(currentEnemy > enemySets.Count - 1){
+            //Boss
+            return;
+        }
 
-            if(enemySet.enemyCount > 0){
-                UpdateSpawnStep(enemySet);
-                
-            }else if(enemySet.enemyCount == 0){
-                isRandom = !isRandom;
-                enemySet.enemyCount--;
+        if(Timer >= enemySets[currentEnemy].delayTime){
+            if(enemySets[currentEnemy].enemyCount > 0){
+                UpdateSpawnStep(enemySets[currentEnemy]);
             }
         }
-        
+
+        if(enemySets[currentEnemy].enemyCount <= 0 && GameObject.FindObjectOfType<Enemy>() == null){
+            Timer = 0;
+            currentEnemy++;
+        }
+
+        Timer += Time.deltaTime;
     }
-
+    
     void RandomWayPoint(){
-
+        //Not now
     }
 }
