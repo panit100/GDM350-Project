@@ -554,10 +554,10 @@ MonoBehaviour:
   - tag: Bullet
     prefab: {fileID: 6164300471798020120, guid: afca9bb6592291b4c9ace27aa658c9bc,
       type: 3}
-    size: 500
+    size: 100
   - tag: SpacialBullet
     prefab: {fileID: 929360117543052337, guid: 951543b9f5067544aab69d3262806d85, type: 3}
-    size: 100
+    size: 0
 --- !u!1 &1287249929
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,33 +711,6 @@ Transform:
   m_Father: {fileID: 2011518848}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1634037751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056267993442757142, guid: 41b8d96f0ceaaa94cbc13fd55436bcb2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5056267991846503905}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1634037757
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634037751}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!1 &1670364141
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,56 +758,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 0
-  wayPoints:
-  - wayPointName: StartPoint
-    randomPoint:
-    - {fileID: 250822105}
-    - {fileID: 1488401909}
-    - {fileID: 630230512}
-  - wayPointName: WayPoint1
-    randomPoint:
-    - {fileID: 1584746146}
-    - {fileID: 864084908}
-    - {fileID: 710258438}
-  - wayPointName: WayPoint2
-    randomPoint:
-    - {fileID: 1037561242}
-    - {fileID: 808250786}
-    - {fileID: 1732531525}
-  - wayPointName: WayPoint3
-    randomPoint:
-    - {fileID: 866394685}
-    - {fileID: 1584991759}
-    - {fileID: 497418661}
-  - wayPointName: EndPoint
-    randomPoint:
-    - {fileID: 1526188787}
-    - {fileID: 784080909}
-    - {fileID: 1798251918}
   enemySets:
   - enemyName: Normal
     enemyPrefab: {fileID: 7439243267241809383, guid: 9f938fa6a79805f4ebf7c58dc1a63101,
       type: 3}
-    enemySpeed: 0.05
+    Hp: 10
+    enemySpeed: 0.25
     enemyCount: 10
-    spawnTime: 0
     delayTime: 5
-    isRandomPoint: 0
     PattenPoint:
     - {fileID: 250822105}
     - {fileID: 1584746146}
     - {fileID: 1037561242}
     - {fileID: 866394685}
     - {fileID: 497418661}
-    - {fileID: 784080909}
+    - {fileID: 1584746146}
   - enemyName: Normal2
     enemyPrefab: {fileID: 7439243267241809383, guid: 9f938fa6a79805f4ebf7c58dc1a63101,
       type: 3}
-    enemySpeed: 0.05
+    Hp: 0
+    enemySpeed: 0.25
     enemyCount: 10
-    spawnTime: 10
     delayTime: 5
-    isRandomPoint: 0
     PattenPoint:
     - {fileID: 250822105}
     - {fileID: 1526188787}
@@ -1006,5 +951,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3081390721876994571, guid: 41b8d96f0ceaaa94cbc13fd55436bcb2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 41b8d96f0ceaaa94cbc13fd55436bcb2, type: 3}

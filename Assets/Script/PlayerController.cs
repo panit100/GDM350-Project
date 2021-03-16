@@ -6,15 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player Setting")]
     [SerializeField]
-    private float moveSpeed = 0f;
 
-    void Start()
-    {
-        
-    }
+    public float moveSpeed = 0f;
 
     void FixedUpdate()
     {
+        moveSpeed = Player.Speed;
+
         Controller();
     }
 

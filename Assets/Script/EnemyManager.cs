@@ -8,18 +8,16 @@ public class EnemyManager : MonoBehaviour
     public class EnemySet{
         public string enemyName;
         public Transform enemyPrefab;
-        public float enemySpeed;
+        [Range(1f,100f)]
+        public float Hp; //base speed is 1f
+        [Range(0.15f,1f)]
+        public float enemySpeed; //base speed is 0.25f
         public int enemyCount;
-        public float spawnTime;
         public float delayTime;
-        public bool isRandomPoint;
+        //public bool isRandomPoint;
         public List<Transform> PattenPoint;
     }
-    [System.Serializable]
-    public class WayPoint{
-        public string wayPointName;
-        public List<Transform> randomPoint;
-    }
+    
     private enum EnemySpawnStep{
         StartDelay,StartSpawn,Waiting
     }
@@ -28,8 +26,6 @@ public class EnemyManager : MonoBehaviour
 
     public float Timer = 0;
 
-    [Header("WayPoint")]
-    public WayPoint[] wayPoints;
 
 
     [Header("SpawnLoopStep")]
@@ -39,7 +35,8 @@ public class EnemyManager : MonoBehaviour
 
     int currentEnemy = 0;
 
-    private void Awake() {
+    private void Awake() 
+    {
         enemyPool = EnemyPool.Instance;
     }
     void FixedUpdate()
@@ -52,7 +49,10 @@ public class EnemyManager : MonoBehaviour
     void SpawnEnemy(EnemySet enemySet){
         GameObject enemy = Instantiate(enemySet.enemyPrefab.gameObject,enemySet.PattenPoint[0]);
         enemy.GetComponent<Enemy>().EnemySetIndex = enemySets.IndexOf(enemySet);
+
         enemy.GetComponent<Enemy>().MoveSpeed = enemySet.enemySpeed;
+        enemy.GetComponent<Enemy>().HitPoint = enemySet.Hp;
+
         enemy.GetComponent<Enemy>().SetMoveDirection(enemySet.PattenPoint[1].position);
 
         enemySet.enemyCount--;

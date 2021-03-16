@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int Damage;
-    Vector2 nextPosition;
-    float moveSpeed = 5f;
     public int EnemySetIndex;
+
+    [Header("EnemySetting")]
+    float Hp = 1f;
+    float moveSpeed = 5f;
+
+    Vector2 nextPosition;
     EnemyManager enemyManager;
     private void Awake() {
         enemyManager = FindObjectOfType<EnemyManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position,nextPosition,moveSpeed);
         transform.rotation = Quaternion.identity;
@@ -24,6 +27,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             //Do Damage to player
+            Player.TakeDamage();
             Destroy(gameObject);
         }
     }
@@ -46,21 +50,29 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed{
         set{ moveSpeed = value;}
     }
+    public float HitPoint{
+        set{ Hp = value;}
+    }
 
     void CheckWayPoint(){
         foreach(Transform n in enemyManager.enemySets[EnemySetIndex].PattenPoint){
             if(transform.position == n.position){
-                
                 int currentPoint = enemyManager.enemySets[EnemySetIndex].PattenPoint.IndexOf(n);
-                print(currentPoint);
+
                 if(currentPoint == enemyManager.enemySets[EnemySetIndex].PattenPoint.Count - 1){
                     return;
                 }
                 SetMoveDirection(enemyManager.enemySets[EnemySetIndex].PattenPoint[++currentPoint].position);
             }
         }
+    }
 
-        
+    public void TakeDamage(float damage){
+        Hp -= damage;
+
+        if(Hp <= 0){
+            DestroyEnemy();
+        }
     }
     
 }
