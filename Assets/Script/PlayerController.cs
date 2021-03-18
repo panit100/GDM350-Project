@@ -6,14 +6,20 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player Setting")]
     [SerializeField]
-
     public float moveSpeed = 0f;
 
+    Player player;
+
+    private void Start() {
+        player = FindObjectOfType<Player>().GetComponent<Player>();
+    }
     void FixedUpdate()
     {
-        moveSpeed = Player.Speed;
+        moveSpeed = player.Speed;
 
         Controller();
+
+        
     }
 
     void Controller(){

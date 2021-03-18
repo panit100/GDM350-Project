@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     public class EnemySet{
         public string enemyName;
         public Transform enemyPrefab;
-        [Range(1f,100f)]
+        [Range(1f,10000f)]
         public float Hp; //base speed is 1f
         [Range(0.15f,1f)]
         public float enemySpeed; //base speed is 0.25f
@@ -23,8 +23,8 @@ public class EnemyManager : MonoBehaviour
     }
     EnemyPool enemyPool;
     EnemySpawnStep enemySpawnStep;
-
-    public float Timer = 0;
+    [SerializeField]
+    float timer = 0;
 
 
 
@@ -85,26 +85,41 @@ public class EnemyManager : MonoBehaviour
     }
 
     void Spawn(){
-        if(currentEnemy > enemySets.Count - 1){
-            //Boss
+        timer += Time.deltaTime;
+
+        if(currentEnemy == enemySets.Count){
             return;
         }
 
-        if(Timer >= enemySets[currentEnemy].delayTime){
+        if(timer >= enemySets[currentEnemy].delayTime){
             if(enemySets[currentEnemy].enemyCount > 0){
                 UpdateSpawnStep(enemySets[currentEnemy]);
             }
         }
 
         if(enemySets[currentEnemy].enemyCount <= 0 && GameObject.FindObjectOfType<Enemy>() == null){
-            Timer = 0;
+            timer = 0;
             currentEnemy++;
         }
-
-        Timer += Time.deltaTime;
     }
     
     void RandomWayPoint(){
         //Not now
+    }
+
+    void CheckActiveEnemy(){
+
+    }
+
+    public int CurrentEnemy{
+        get{
+            return currentEnemy;
+        }
+    }
+
+    public float Timer{
+        get{
+            return timer;
+        }
     }
 }

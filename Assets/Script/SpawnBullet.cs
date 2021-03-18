@@ -11,14 +11,14 @@ public class SpawnBullet : MonoBehaviour
 
     public string BulletName = null;
     BulletPool bulletPool;
+    Player player;
     
-    [SerializeField,Range(1,3)]
     int BulletNum = 1; //จำนวนกระสุนที่ออกพร้อมกัน
-    public int WayNum = 1;
+    int WayNum = 1;
 
     public int startAngle = 0,endAngle = 360;
     private const float radius = 1f;
-    public float bulletSpeed = 0f;
+    float bulletSpeed = 0f;
 
     
 
@@ -27,12 +27,18 @@ public class SpawnBullet : MonoBehaviour
     public float delayTimer = 0; 
     public float delayTime = 0; //ตั้งความเร็วการยิง
 
+    private void Awake() {
+        player = FindObjectOfType<Player>().GetComponent<Player>();
+    }
     private void Start() {
         bulletPool = BulletPool.Instance;    
     }
 
     void FixedUpdate()
     {
+        BulletNum = player.BulletNum;
+        bulletSpeed = player.BulletSpeed;
+
         if(Input.GetKey(KeyCode.Space)){
             UpdateShotStep();
         }

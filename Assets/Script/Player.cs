@@ -2,30 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Player
+public class Player : MonoBehaviour
 {
-    static bool alive = true;
-    static bool shieldOn = true;
+    bool alive = true;
+    public bool shield = false;
+    float spacialTime = 5f;
 
     [Header("Player Stat")]
-    static float damage = 5f;
-    static float speed = 10f;
+    float damage = 5f;
+    float speed = 10f;
 
     [Header("Bullet Stat")]
 
     [Range(1,3)]
-    static int bulletNum = 1; //จำนวนกระสุนที่ออกพร้อมกัน 1-3
-    static float bulletSpeed = 0f; //base speed 50;
+    int bulletNum = 1; //จำนวนกระสุนที่ออกพร้อมกัน 1-3
+    float bulletSpeed = 50f; //base speed 50  Max 200;
 
-    public static void TakeDamage(){
-        if(shieldOn){
-            shieldOn = false;
+    private void Update() {
+        SpacialTime();
+    }
+
+    public void TakeDamage(){
+        if(spacialTime > 0){
+            return;
+        }
+
+        if(shield){
+            shield = false;
+            spacialTime = 3f;
         }else{
             alive = false;
         }
     }
 
-    public static float Damage{
+    public float Damage{
         set{
             damage = value;
         }
@@ -34,7 +44,7 @@ public static class Player
             return damage;
         }
     }
-    public static float Speed{
+    public float Speed{
         set{
             speed = value;
         }
@@ -43,21 +53,61 @@ public static class Player
             return speed;
         }
     }
-    public static int BulletNum{
+    public int BulletNum{
         set{
             bulletNum = value;
+
+            if(bulletNum > 3){
+                bulletNum = 3;
+            }
+
+            
         }
 
         get {
             return bulletNum;
         }
-    }public static float BulletSpeed{
+    }
+    public float BulletSpeed{
         set{
             bulletSpeed = value;
+
+            if(bulletSpeed > 200){
+                bulletSpeed = 200;
+            }
+
         }
 
         get {
             return bulletSpeed;
+        }
+    }
+    public bool Alive{
+        set{
+            alive = value;
+        }
+
+        get {
+            return alive;
+        }
+    }
+    public bool Shield{
+        set{
+            shield = value;
+        }
+
+        get {
+            return shield;
+        }
+    }
+
+    void SpacialTime(){
+        if(spacialTime >= 0){
+            GetComponent<CircleCollider2D>().isTrigger = true;
+            spacialTime -= Time.deltaTime;
+            //player animation
+        }else{
+            GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 

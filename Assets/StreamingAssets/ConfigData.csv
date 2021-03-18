@@ -1,0 +1,6 @@
+No,Name,Speed,Damage,BulletNum,BulletSpeed,Shiled,DropRate
+1,ItemSpeed,2,0,0,0,FALSE,5
+2,ItemDamage,0,2,0,0,FALSE,5
+3,ItemBulletNum,0,0,1,0,FALSE,5
+4,ItemBulletSpeed,0,0,0,5,FALSE,5
+5,ItemShield,0,0,0,0,TRUE,5

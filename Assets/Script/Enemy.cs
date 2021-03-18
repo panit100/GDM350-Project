@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int EnemySetIndex;
+    public bool BossObject = false;
 
     [Header("EnemySetting")]
     float Hp = 1f;
@@ -12,8 +13,14 @@ public class Enemy : MonoBehaviour
 
     Vector2 nextPosition;
     EnemyManager enemyManager;
+    Player player;
+
     private void Awake() {
         enemyManager = FindObjectOfType<EnemyManager>();
+    }
+
+    private void Start() {
+        player = FindObjectOfType<Player>().GetComponent<Player>();
     }
 
     void FixedUpdate()
@@ -21,14 +28,20 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position,nextPosition,moveSpeed);
         transform.rotation = Quaternion.identity;
         
+        if(BossObject){
+            print(Hp);
+        }
+
         CheckWayPoint();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             //Do Damage to player
-            Player.TakeDamage();
-            Destroy(gameObject);
+            player.TakeDamage();
+            if(gameObject.tag != "Boss"){
+                DestroyEnemy();
+            }
         }
     }
 
@@ -44,6 +57,10 @@ public class Enemy : MonoBehaviour
     }
 
     public void DestroyEnemy(){
+        //Drop Item
+        ItemManager itemManager = FindObjectOfType<ItemManager>().GetComponent<ItemManager>();
+        itemManager.DropItem(transform);
+
         Destroy(gameObject);
     }
 
