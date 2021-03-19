@@ -653,6 +653,7 @@ GameObject:
   - component: {fileID: 1005178163}
   - component: {fileID: 1005178162}
   - component: {fileID: 1005178164}
+  - component: {fileID: 1005178165}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -706,6 +707,18 @@ MonoBehaviour:
   - {fileID: 3280470901178948815, guid: ffd8fff877d01b94bb6f7ce32920bb9f, type: 3}
   - {fileID: 4836432275235971839, guid: 99bdc6f455e977d4c80af0abec068c90, type: 3}
   ConfFileName: ConfigData.csv
+--- !u!114 &1005178165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005178161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54b3242c84edd744acd2fc35b84c48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1037561241
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +945,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005178162}
+      - m_Target: {fileID: 1005178165}
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -1400,6 +1413,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 992226125, guid: 41b8d96f0ceaaa94cbc13fd55436bcb2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41b8d96f0ceaaa94cbc13fd55436bcb2, type: 3}

@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     public Button restart;
 
     EnemyManager enemyManager;
+    JsonManager jsonManager;
     int sceneIndex;
     Player player;
     
@@ -18,8 +19,10 @@ public class Manager : MonoBehaviour
 
         enemyManager = FindObjectOfType<EnemyManager>().GetComponent<EnemyManager>();
         player = FindObjectOfType<Player>().GetComponent<Player>();
+        jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(sceneIndex);
     }
 
     private void Update() {
@@ -32,15 +35,22 @@ public class Manager : MonoBehaviour
     void CheckActiveEnemy(){
         if(enemyManager.CurrentEnemy == enemyManager.enemySets.Count){
             print("Do something Before Change Scene");
+            jsonManager.CreateJson();
+            PlayerPrefs.SetInt("ContinueScene",sceneIndex+1);
+            PlayerPrefs.Save();
             if(enemyManager.Timer >= 5f){
-                if(sceneIndex == SceneManager.sceneCountInBuildSettings){
-                    //delete save
+                if(sceneIndex == SceneManager.sceneCountInBuildSettings-1){
                     //End game
+                    PlayerPrefs.DeleteKey("ContinueScene");
                     return;
+                }else{
+                    //save;
+                    //PlayerPref key int ContinueScene
+                
+                    SceneManager.LoadScene(sceneIndex+1);
+                    print("Change Scene");
                 }
-                //save;
-                SceneManager.LoadScene(sceneIndex+1);
-                print("Change Scene");
+                
             }
             return;
         }
@@ -53,15 +63,14 @@ public class Manager : MonoBehaviour
             if(player != null){
                 Destroy(player.gameObject);
             }
+
+            //delete save
+            PlayerPrefs.DeleteKey("ContinueScene");
             
             //Show UI
             restart.gameObject.SetActive(true);
-            
-            //delete save
         }
     }
 
-    public void Restart(){
-        SceneManager.LoadScene(sceneIndex);
-    }
+    
 }

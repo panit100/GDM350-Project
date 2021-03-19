@@ -1,0 +1,7 @@
+{
+    "damage" : 5,
+    "speed" : 5,
+    "bulletNum" : 1,
+    "bulletSpeed" : 20
+   
+}

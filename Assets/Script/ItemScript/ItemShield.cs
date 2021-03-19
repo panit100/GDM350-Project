@@ -8,6 +8,7 @@ public class ItemShield : BaseItem
     {
         Player player = FindObjectOfType<Player>().GetComponent<Player>();
         player.Shield = shield;
+        player.shieldSprite.SetActive(true);
         base.Ability();
     }
 }
