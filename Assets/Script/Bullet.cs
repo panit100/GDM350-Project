@@ -2,47 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Projectile
 {
-    float damage;
     Vector2 moveDirection;
-    float moveSpeed = 5f;
     Player player;
 
     private void Start() {
         player = FindObjectOfType<Player>().GetComponent<Player>();
-    }
-
-    void FixedUpdate()
-    {
         damage = player.Damage;
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss" ){
-            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            DestroyBullet();
-        }
-    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        Entity hitEntity = other.gameObject.GetComponent<Entity>();
 
-    public void SetMoveDirection(Vector2 dir){
-        moveDirection = dir;
-    }
+        if(hitEntity == null)
+            return;
+        if(hitEntity is Player && ownedBy is Player)
+            return;
+        if(hitEntity is Enemy && ownedBy is Enemy)
+            return;
 
-    private void OnBecameInvisible() {
+        hitEntity.TakeDamage(damage);
         DestroyBullet();
     }
 
-    private void OnBecameVisible() {
-        CancelInvoke();
-    }
-
-    void DestroyBullet(){
+    public override void DestroyBullet(){
         gameObject.SetActive(false);
     }
 
+    // public void SetMoveDirection(Vector2 dir){
+    //     moveDirection = dir;
+    // }
+
+    
+
+     
+
+    // public IEnumerator DestroyBulletOverSeconds(float time){
+    //     yield return new WaitForSeconds(time);
+    //     DestroyBullet();
+    // }
+
     public float MoveSpeed{
-        set{ moveSpeed = value;}
+        set{ speed = value;}
     }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBullet : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
+    public float fireRate = 0;
+    public float cooldown = 0;
+    public Entity Parent;
 
-    private enum ShotStep{
-        StartDelay,StartShot,WaitDelay,FinishShot
-    }
 
     public string BulletName = null;
     BulletPool bulletPool;
@@ -20,31 +20,36 @@ public class SpawnBullet : MonoBehaviour
     private const float radius = 1f;
     float bulletSpeed = 0f;
 
-    
-
-    [Header("ShotStep")]
-    ShotStep shotStep;
-    public float delayTimer = 0; 
-    public float delayTime = 0; //ตั้งความเร็วการยิง
-
     private void Awake() {
         player = FindObjectOfType<Player>().GetComponent<Player>();
     }
     private void Start() {
         bulletPool = BulletPool.Instance;    
+        fireRate = player.FireRate;
     }
 
     void FixedUpdate()
     {
+        cooldown -= Time.deltaTime;
+
         BulletNum = player.BulletNum;
         bulletSpeed = player.BulletSpeed;
 
         if(Input.GetKey(KeyCode.Space)){
-            UpdateShotStep();
+            Fire();
         }
     }
 
-    void Shot(){
+    public virtual void Fire(){
+        if(cooldown > 0){
+            return;
+        }
+
+        BulletShot();
+        cooldown = fireRate;
+    }
+
+    void BulletShot(){
         float angleStep = (startAngle - endAngle) / WayNum;
         float angle = startAngle;
 
@@ -57,6 +62,8 @@ public class SpawnBullet : MonoBehaviour
 
                 Vector3 MoveVector = new Vector3(DirX,DirY,0);
                 Vector2 BulletDirection = (MoveVector - bullet.transform.position).normalized; //can *speed to increace speed bullet;
+                
+                bullet.GetComponent<Bullet>().ownedBy = Parent;
 
                 bullet.GetComponent<Bullet>().MoveSpeed = bulletSpeed;
             }
@@ -80,6 +87,8 @@ public class SpawnBullet : MonoBehaviour
                 Vector3 MoveVector2 = new Vector3(DirX2,DirY2,0);
                 Vector2 BulletDirection2 = (MoveVector2 - bullet2.transform.position).normalized;
             
+                bullet1.GetComponent<Bullet>().ownedBy = Parent;
+                bullet2.GetComponent<Bullet>().ownedBy = Parent;
             
                 bullet1.GetComponent<Bullet>().MoveSpeed = bulletSpeed;
                 bullet2.GetComponent<Bullet>().MoveSpeed = bulletSpeed;
@@ -113,6 +122,9 @@ public class SpawnBullet : MonoBehaviour
                 Vector3 MoveVector3 = new Vector3(DirX3,DirY3,0);
                 Vector2 BulletDirection3 = (MoveVector3 - bullet3.transform.position).normalized;
             
+                bullet1.GetComponent<Bullet>().ownedBy = Parent;
+                bullet2.GetComponent<Bullet>().ownedBy = Parent;
+                bullet3.GetComponent<Bullet>().ownedBy = Parent;
             
                 bullet1.GetComponent<Bullet>().MoveSpeed = bulletSpeed;
                 bullet2.GetComponent<Bullet>().MoveSpeed = bulletSpeed;
@@ -120,33 +132,8 @@ public class SpawnBullet : MonoBehaviour
 
             }
 
-
             angle += angleStep;
         }
     }
 
-    void UpdateShotStep(){
-        if(shotStep == ShotStep.StartDelay){
-            if(delayTimer > 0f){
-                delayTimer -= Time.deltaTime;
-                return;
-            }else{
-                delayTimer = 0f;
-                shotStep = ShotStep.StartShot;
-            }
-        }
-
-        if(shotStep == ShotStep.StartShot){
-            Shot();
-
-            delayTimer = delayTime;
-            shotStep = ShotStep.WaitDelay;
-        }
-
-        if(shotStep == ShotStep.WaitDelay){
-            if(delayTimer > 0f){
-                shotStep = ShotStep.StartDelay;
-            }
-        }
-    }
 }

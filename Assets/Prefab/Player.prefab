@@ -117,10 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6f4068291de104d8b5ee07d2eeffd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldSprite: {fileID: 5976530939258671181}
+  hitPoint: 1
   shield: 1
+  isDead: 0
+  shieldSprite: {fileID: 5976530939258671181}
   damage: 5
   speed: 10
+  fireRate: 0.5
   bulletNum: 1
   bulletSpeed: 50
 --- !u!114 &5056267993442757146
@@ -178,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5056267993811676168}
-  - component: {fileID: 5056267993811676171}
+  - component: {fileID: 5056267991846503907}
   m_Layer: 0
   m_Name: EndBarrel
   m_TagString: Untagged
@@ -200,7 +203,7 @@ Transform:
   m_Father: {fileID: 5056267993442757144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5056267993811676171
+--- !u!114 &5056267991846503907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,14 +212,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5056267993811676169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cf84bd1ef3b35e4bb6ca6ddc1502e06, type: 3}
+  m_Script: {fileID: 11500000, guid: fb0556edf2455d345ae4a6fbe84dd755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 0.5
+  cooldown: 0
+  Parent: {fileID: 6714659231718723523}
   BulletName: Bullet
-  startAngle: 0
-  endAngle: 360
-  delayTimer: 0
-  delayTime: 0.1
+  startAngle: 90
+  endAngle: 270
 --- !u!1 &5976530939258671181
 GameObject:
   m_ObjectHideFlags: 0

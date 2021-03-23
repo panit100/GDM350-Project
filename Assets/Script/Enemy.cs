@@ -2,58 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    public int EnemySetIndex;
-    public bool BossObject = false;
+    float fireRate = 0.1f;
 
-    [Header("EnemySetting")]
-    float Hp = 1f;
-    float moveSpeed = 5f;
+    float damageWhenHit = 10000f;
 
-    Vector2 nextPosition;
-    EnemyManager enemyManager;
     Player player;
+    EnemyWeapon[] weapons;
 
-    private void Awake() {
-        enemyManager = FindObjectOfType<EnemyManager>();
-    }
 
     private void Start() {
         player = FindObjectOfType<Player>().GetComponent<Player>();
+
+        weapons = GetComponentsInChildren<EnemyWeapon>();
     }
 
-    void FixedUpdate()
+    public void Fire()
     {
-        transform.position = Vector2.MoveTowards(transform.position,nextPosition,moveSpeed);
-        transform.rotation = Quaternion.identity;
-        
-        if(BossObject){
-            print(Hp);
+        if (weapons.Length == 0) return;
+        foreach(EnemyWeapon weapon in weapons)
+        {
+            weapon.fire();
         }
-
-        CheckWayPoint();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             //Do Damage to player
-            player.TakeDamage();
+            player.TakeDamage(damageWhenHit);
             if(gameObject.tag != "Boss"){
                 DestroyEnemy();
             }
         }
-    }
-
-    public void SetMoveDirection(Vector2 dir){
-        nextPosition = dir;
-    }
-    private void OnBecameInvisible() {
-        Invoke("DestroyEnemy",1.5f);
-    }
-
-    private void OnBecameVisible() {
-        CancelInvoke();
     }
 
     public void DestroyEnemy(){
@@ -64,32 +45,28 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public float MoveSpeed{
-        set{ moveSpeed = value;}
-    }
+    
     public float HitPoint{
-        set{ Hp = value;}
+        set{ hitPoint = value;}
     }
 
-    void CheckWayPoint(){
-        foreach(Transform n in enemyManager.enemySets[EnemySetIndex].PattenPoint){
-            if(transform.position == n.position){
-                int currentPoint = enemyManager.enemySets[EnemySetIndex].PattenPoint.IndexOf(n);
+    public override void Die()
+    {
+        DestroyEnemy();
+        base.Die();
+    }
 
-                if(currentPoint == enemyManager.enemySets[EnemySetIndex].PattenPoint.Count - 1){
-                    return;
-                }
-                SetMoveDirection(enemyManager.enemySets[EnemySetIndex].PattenPoint[++currentPoint].position);
-            }
+    public float FireRate{
+        set{
+            fireRate = value;
+        }
+
+        get{
+            return fireRate;
         }
     }
 
-    public void TakeDamage(float damage){
-        Hp -= damage;
 
-        if(Hp <= 0){
-            DestroyEnemy();
-        }
-    }
+    
     
 }

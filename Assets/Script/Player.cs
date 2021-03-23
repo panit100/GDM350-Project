@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     JsonManager jsonManager;
     public GameObject shieldSprite;
 
-
-    bool alive = true;
-    public bool shield = true; //base True;
-    float UndyingTime = 5f;
-
     [Header("Player Stat")]
     public float damage = 5f;
     public float speed = 10f;
+    public float fireRate = 1f;
+    float UndyingTime = 5f;
 
     [Header("Bullet Stat")]
 
@@ -27,6 +24,8 @@ public class Player : MonoBehaviour
         jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
         jsonManager.LoadSaveJson();
 
+        shield = true;
+
         
 		AssignJson();
     }
@@ -35,7 +34,7 @@ public class Player : MonoBehaviour
         SpacialTime();
     }
 
-    public void TakeDamage(){
+    public override void TakeDamage(float damage){
         if(UndyingTime > 0){
             return;
         }
@@ -44,9 +43,16 @@ public class Player : MonoBehaviour
             shield = false;
             shieldSprite.SetActive(false);
             UndyingTime = 3f;
-        }else{
-            alive = false;
+            return;
         }
+
+        base.TakeDamage(damage);
+    }
+
+    public override void Die()
+    {
+        Manager manager = FindObjectOfType<Manager>().GetComponent<Manager>();
+        manager.isPlayerDead();
     }
 
     public float Damage{
@@ -71,6 +77,20 @@ public class Player : MonoBehaviour
             return speed;
         }
     }
+    public float FireRate{
+        set{
+            fireRate = value;
+
+            if(fireRate < 0.1f){
+                fireRate = 0.1f;
+            }
+        }
+
+        get{
+            return fireRate;
+        }
+    }
+
     public int BulletNum{
         set{
             bulletNum = value;
@@ -78,8 +98,6 @@ public class Player : MonoBehaviour
             if(bulletNum > 3){
                 bulletNum = 3;
             }
-
-            
         }
 
         get {
@@ -93,22 +111,13 @@ public class Player : MonoBehaviour
             if(bulletSpeed > 70){
                 bulletSpeed = 70;
             }
-
         }
 
         get {
             return bulletSpeed;
         }
     }
-    public bool Alive{
-        set{
-            alive = value;
-        }
-
-        get {
-            return alive;
-        }
-    }
+    
     public bool Shield{
         set{
             shield = value;

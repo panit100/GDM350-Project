@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController main;
     [Header("Player Setting")]
     [SerializeField]
     public float moveSpeed = 0f;
 
     Player player;
+
+    private void Awake() {
+        main = this;
+    }
 
     private void Start() {
         player = FindObjectOfType<Player>().GetComponent<Player>();
