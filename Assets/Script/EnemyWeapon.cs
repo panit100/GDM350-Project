@@ -33,4 +33,15 @@ public class EnemyWeapon : MonoBehaviour
         
 
     }
+
+    public void fireProjectile(){
+        if(cooldown > 0)
+            return;
+        
+        Projectile newProjectile = Instantiate(projectile,transform.position,projectile.transform.rotation);
+        newProjectile.ownedBy = Parent;
+        cooldown = fireRate;
+        
+
+    }
 }

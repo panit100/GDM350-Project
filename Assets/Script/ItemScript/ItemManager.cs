@@ -41,12 +41,14 @@ public class ItemManager : MonoBehaviour
         string itemName = data[1];
         float speed = float.Parse(data[2]);
         float damage = float.Parse(data[3]);
-        int bulletNum = int.Parse(data[4]);
-        float bulletSpeed = float.Parse(data[5]);
-        bool shield = bool.Parse(data[6]);
-        int dropRate = int.Parse(data[7]);
+        float fireRate = float.Parse(data[4]);
+        int bulletNum = int.Parse(data[5]);
+        float bulletSpeed = float.Parse(data[6]);
+        float scale = int.Parse(data[7]);
+        bool shield = bool.Parse(data[8]);
+        int dropRate = int.Parse(data[9]);
         
-        Item item = new Item(speed,damage,bulletNum,bulletSpeed,shield,dropRate);
+        Item item = new Item(speed,damage,fireRate,bulletNum,bulletSpeed,scale,shield,dropRate);
         Items.Add(itemName, item);
     }
 
@@ -56,17 +58,22 @@ public class ItemManager : MonoBehaviour
         string className = item[randomItem].GetType().Name;
         float speed = 0;
         float damage = 0;
+        float fireRate = 0;
         int bulletNum = 0;
         float bulletSpeed = 0;
+        float scale = 0;
         bool shield = false;
         int dropRate = 0;
-            Item ItemData = new Item(speed,damage,bulletNum,bulletSpeed,shield,dropRate);
+            Item ItemData = new Item(speed,damage,fireRate,bulletNum,bulletSpeed,scale,shield,dropRate);
             switch(className){
                 case "ItemSpeed" :
                     ItemData = Items["ItemSpeed"];
                     break;
                 case "ItemDamage" :
                     ItemData = Items["ItemDamage"];
+                    break;
+                case "ItemFireRate" :
+                    ItemData = Items["ItemFireRate"];
                     break;
                 case "ItemBulletNum" :
                     ItemData = Items["ItemBulletNum"];
@@ -77,14 +84,20 @@ public class ItemManager : MonoBehaviour
                 case "ItemShield" :
                     ItemData = Items["ItemShield"];
                     break;
+                case "ItemScale" :
+                    ItemData = Items["ItemScale"];
+                    break;
+                
                 default:
                     break;
             }
 
         item[randomItem].speed = ItemData.Speed;
         item[randomItem].damage = ItemData.Damage;
+        item[randomItem].fireRate = ItemData.FireRate;
         item[randomItem].bulletNum = ItemData.BulletNum;
         item[randomItem].bulletSpeed = ItemData.BulletSpeed;
+        item[randomItem].scale = ItemData.Scale;
         item[randomItem].shield = ItemData.Shiled;
 
         int randomDrop = UnityEngine.Random.Range(0,100);

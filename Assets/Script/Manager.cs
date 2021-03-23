@@ -23,12 +23,6 @@ public class Manager : MonoBehaviour
         Debug.Log(sceneIndex);
     }
 
-    private void Update() {
-
-        // CheckActiveEnemy();
-    }
-
-
     public void isBossDie(){
 
         

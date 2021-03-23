@@ -10,8 +10,10 @@ public class BaseItem : MonoBehaviour
     [Header("Stat")]
     public float speed = 0;
     public float damage = 0;
+    public float fireRate = 0;
     public int bulletNum = 0;
     public float bulletSpeed = 0;
+    public float scale = 0;
     public bool shield = false;
 
     private void Start() {

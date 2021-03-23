@@ -27,6 +27,15 @@ public class Enemy : Entity
         }
     }
 
+    public void FireProjectile()
+    {
+        if (weapons.Length == 0) return;
+        foreach(EnemyWeapon weapon in weapons)
+        {
+            weapon.fireProjectile();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             //Do Damage to player
