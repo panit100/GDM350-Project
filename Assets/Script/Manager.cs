@@ -9,6 +9,8 @@ public class Manager : MonoBehaviour
     [Header("UI")]
     public Button restart;
     public Text ShowText;
+    public GameObject PauseMenu;
+
 
     JsonManager jsonManager;
     int sceneIndex;
@@ -22,6 +24,18 @@ public class Manager : MonoBehaviour
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log(sceneIndex);
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(Time.timeScale == 0){
+                Time.timeScale = 1;
+                PauseMenu.SetActive(false);
+            }else if(Time.timeScale == 1){
+                Time.timeScale = 0;
+                PauseMenu.SetActive(true);
+            }
+        }
     }
 
     public void isBossDie(){
