@@ -44,7 +44,7 @@ public class ItemManager : MonoBehaviour
         float fireRate = float.Parse(data[4]);
         int bulletNum = int.Parse(data[5]);
         float bulletSpeed = float.Parse(data[6]);
-        float scale = int.Parse(data[7]);
+        float scale = float.Parse(data[7]);
         bool shield = bool.Parse(data[8]);
         int dropRate = int.Parse(data[9]);
         
@@ -102,7 +102,7 @@ public class ItemManager : MonoBehaviour
 
         int randomDrop = UnityEngine.Random.Range(0,100);
         if(randomDrop <= ItemData.DropRate){
-            Instantiate(item[randomItem],transform.position,transform.rotation);
+            Instantiate(item[randomItem],transform.position,item[randomItem].transform.rotation);
         }
 
         
