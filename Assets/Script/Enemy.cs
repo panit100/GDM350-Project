@@ -36,6 +36,15 @@ public class Enemy : Entity
         }
     }
 
+    public void FireEnemyUp()
+    {
+        if (weapons.Length == 0) return;
+        foreach(EnemyWeapon weapon in weapons)
+        {
+            weapon.fireEnemyUp();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             //Do Damage to player

@@ -1,8 +1,8 @@
 No,Name,Speed,Damage,FireRate,BulletNum,BulletSpeed,Scale,Shiled,DropRate
-1,ItemSpeed,2,0,0,0,0,0,FALSE,5
-2,ItemDamage,0,2,0,0,0,0,FALSE,5
-3,ItemBulletNum,0,0,0,1,0,0,FALSE,5
-4,ItemBulletSpeed,0,0,0,0,5,0,FALSE,5
-5,ItemShield,0,0,0,0,0,0,TRUE,5
-6,ItemFireRate,0,0,0.05,0,0,0,FALSE,5
-7,ItemScale,0,0,0,0,0,0.05,FALSE,5
+1,ItemSpeed,5,0,0,0,0,0,FALSE,20
+2,ItemDamage,0,2,0,0,0,0,FALSE,20
+3,ItemBulletNum,0,0,0,1,0,0,FALSE,20
+4,ItemBulletSpeed,0,0,0,0,5,0,FALSE,20
+5,ItemShield,0,0,0,0,0,0,TRUE,20
+6,ItemFireRate,0,0,0.05,0,0,0,FALSE,20
+7,ItemScale,0,0,0,0,0,0.05,FALSE,20

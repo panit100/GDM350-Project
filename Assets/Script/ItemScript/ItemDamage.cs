@@ -8,6 +8,8 @@ public class ItemDamage : BaseItem
     {
         Player player = FindObjectOfType<Player>().GetComponent<Player>();
         player.Damage += damage;
+        LevelItemUI levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
+        levelItemUI.LvDamage++;
         base.Ability();
     }
 }

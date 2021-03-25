@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0887fd5a75aed540aa9e4894e7a0c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRate: 0.01
   cooldown: 0
   Parent: {fileID: 1173027138599730247}
   projectile: {fileID: 4716215773686556506, guid: b726c9a6acbe8df43a4911e97d5d9871,
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5891428960969294522}
   - component: {fileID: 2918021157568002137}
   m_Layer: 10
-  m_Name: Enemy2
+  m_Name: Enemy2_2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ Animator:
   m_GameObject: {fileID: 9018226667071002168}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd111856cc9dac34db271bfd794809e4, type: 2}
+  m_Controller: {fileID: 9100000, guid: d79d442b2fe33ed40b37dee0eb64f8cf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

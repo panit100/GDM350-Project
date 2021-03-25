@@ -30,6 +30,7 @@ public class EnemyWeapon : MonoBehaviour
         newProjectile.transform.eulerAngles = new Vector3(0, 0, rot_z - 90);
         newProjectile.ownedBy = Parent;
         cooldown = fireRate;
+        print("fire");
         
 
     }
@@ -41,7 +42,16 @@ public class EnemyWeapon : MonoBehaviour
         Projectile newProjectile = Instantiate(projectile,transform.position,projectile.transform.rotation);
         newProjectile.ownedBy = Parent;
         cooldown = fireRate;
-        
+        print("Pro");
+    }
 
+    public void fireEnemyUp(){
+        if(cooldown > 0)
+            return;
+        
+        Projectile newProjectile = Instantiate(projectile,transform.position,Parent.transform.rotation);
+        newProjectile.ownedBy = Parent;
+        cooldown = fireRate;
+        print("Up");
     }
 }

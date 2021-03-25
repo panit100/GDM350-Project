@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0887fd5a75aed540aa9e4894e7a0c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRate: 0.01
   cooldown: 0
   Parent: {fileID: 4208635229983723484}
   projectile: {fileID: 4716215773686556506, guid: b726c9a6acbe8df43a4911e97d5d9871,
@@ -212,6 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321723d6b744de24f8316d229091c4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: 100
+  hitPoint: 300
   shield: 0
   isDead: 0

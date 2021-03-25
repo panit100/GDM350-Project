@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float damage;
     public Entity ownedBy;
 
+
     private void FixedUpdate() {
         transform.Translate(Vector2.up * Time.deltaTime * speed);
     }

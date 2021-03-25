@@ -16,14 +16,26 @@ public class JsonManager : MonoBehaviour
         public int bulletNum; //จำนวนกระสุนที่ออกพร้อมกัน 1-3
         public float bulletSpeed; //base speed 50  Max 200;
 		public Vector2 PlayerScale;
+
+		public int LvDamage;
+        public int LvSpeed;
+		public int LvFireRate;
+        public int LvBulletNum;
+        public int LvBulletSpeed;
+		public int LvPlayerScale;
     }
     public PlayerData playerData;
     Player player;
+	LevelItemUI levelItemUI;
 
     private void Start() {
         if(FindObjectOfType<Player>() != null){
             player = FindObjectOfType<Player>().GetComponent<Player>();
         }
+
+		if(FindObjectOfType<LevelItemUI>() != null){
+			levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
+		}  
     }
 
     //Json
@@ -38,6 +50,13 @@ public class JsonManager : MonoBehaviour
 		    NewplayerData.bulletNum = player.BulletNum;
 		    NewplayerData.bulletSpeed = player.BulletSpeed;
 			NewplayerData.PlayerScale = player.transform.localScale;
+			NewplayerData.LvDamage = levelItemUI.LvDamage;
+			NewplayerData.LvSpeed = levelItemUI.LvSpeed;
+			NewplayerData.LvFireRate = levelItemUI.LvFireRate;
+			NewplayerData.LvBulletNum = levelItemUI.LvBulletNum;
+			NewplayerData.LvBulletSpeed = levelItemUI.LvBulletSpeed;
+			NewplayerData.LvPlayerScale = levelItemUI.LvPlayerScale;
+
         }else{
             NewplayerData.damage = playerData.damage;
 		    NewplayerData.speed = playerData.speed;
@@ -45,6 +64,12 @@ public class JsonManager : MonoBehaviour
 		    NewplayerData.bulletNum = playerData.bulletNum;
 		    NewplayerData.bulletSpeed = playerData.bulletSpeed;
 			NewplayerData.PlayerScale = playerData.PlayerScale;
+			NewplayerData.LvDamage = playerData.LvDamage;
+			NewplayerData.LvSpeed = playerData.LvSpeed;
+			NewplayerData.LvFireRate = playerData.LvFireRate;
+			NewplayerData.LvBulletNum = playerData.LvBulletNum;
+			NewplayerData.LvBulletSpeed = playerData.LvBulletSpeed;
+			NewplayerData.LvPlayerScale = playerData.LvPlayerScale;
         }
 		
 

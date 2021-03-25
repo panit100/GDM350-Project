@@ -8,6 +8,8 @@ public class ItemBulletSpeed : BaseItem
     {
         Player player = FindObjectOfType<Player>().GetComponent<Player>();
         player.BulletSpeed += bulletSpeed;
+        LevelItemUI levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
+        levelItemUI.LvBulletSpeed++;
         base.Ability();
     }
 }

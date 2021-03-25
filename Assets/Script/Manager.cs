@@ -8,6 +8,7 @@ public class Manager : MonoBehaviour
 {
     [Header("UI")]
     public Button restart;
+    public Text ShowText;
 
     JsonManager jsonManager;
     int sceneIndex;
@@ -27,6 +28,7 @@ public class Manager : MonoBehaviour
 
         
             print("Do something Before Change Scene");
+            ShowText.gameObject.SetActive(true);
             jsonManager.CreateJson();
             PlayerPrefs.SetInt("ContinueScene",sceneIndex+1);
             PlayerPrefs.Save();

@@ -8,6 +8,8 @@ public class ItemFireRate : BaseItem
     {
         Player player = FindObjectOfType<Player>().GetComponent<Player>();
         Weapon weapon = FindObjectOfType<Weapon>().GetComponent<Weapon>();
+        LevelItemUI levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
+        levelItemUI.LvFireRate++;
         player.FireRate -= fireRate;
         weapon.fireRate -= fireRate;
         base.Ability();
