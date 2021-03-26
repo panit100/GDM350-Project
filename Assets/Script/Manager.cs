@@ -23,7 +23,6 @@ public class Manager : MonoBehaviour
         jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(sceneIndex);
     }
 
     private void Update() {

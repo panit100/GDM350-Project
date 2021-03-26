@@ -74,7 +74,6 @@ public class JsonManager : MonoBehaviour
 		
 
 		json = JsonUtility.ToJson(NewplayerData);
-		Debug.Log(json);
 		File.WriteAllText(Application.dataPath + "/StreamingAssets" + "/saveFile.json",json);
 	}
 
@@ -83,12 +82,7 @@ public class JsonManager : MonoBehaviour
 		string jsonFromFile = File.ReadAllText(Application.dataPath + "/StreamingAssets" + "/playerConfig.json");
 
 		playerData = JsonUtility.FromJson<PlayerData>(jsonFromFile);
-		Debug.Log("damage = " + playerData.damage);
-		Debug.Log("speed = " + playerData.speed);
-		Debug.Log("fireRate = " + playerData.fireRate);
-		Debug.Log("bulletNum = " + playerData.bulletNum);
-		Debug.Log("bulletSpeed = " + playerData.bulletSpeed);
-		Debug.Log("Scale = " + playerData.PlayerScale);
+		
 	}
 
     //Load Save
@@ -96,12 +90,7 @@ public class JsonManager : MonoBehaviour
 		string jsonFromFile = File.ReadAllText(Application.dataPath + "/StreamingAssets" + "/saveFile.json");
 
 		playerData = JsonUtility.FromJson<PlayerData>(jsonFromFile);
-		Debug.Log("damage = " + playerData.damage);
-		Debug.Log("speed = " + playerData.speed);
-		Debug.Log("fireRate = " + playerData.fireRate);
-		Debug.Log("bulletNum = " + playerData.bulletNum);
-		Debug.Log("bulletSpeed = " + playerData.bulletSpeed);
-		Debug.Log("Scale = " + playerData.PlayerScale);
+		
 	}
 
 	
