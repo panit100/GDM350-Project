@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//LifePoint
 public class Player : Entity
 {
     JsonManager jsonManager;
@@ -28,6 +29,7 @@ public class Player : Entity
 
         
 		AssignJson();
+        Invoke("EnableBoundaires",1);
     }
 
     private void Update() {
@@ -153,4 +155,9 @@ public class Player : Entity
         BulletNum = jsonManager.playerData.bulletNum;
         BulletSpeed = jsonManager.playerData.bulletSpeed;
 	}
+
+    void EnableBoundaires(){
+        GetComponent<Boundaries>().enabled = true;
+    }
+    
 }

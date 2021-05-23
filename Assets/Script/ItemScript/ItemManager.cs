@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using RandomDLL;
 
 public class ItemManager : MonoBehaviour
 {
+    RandomItem randomItem1;
     public BaseItem[] item;
+    int randomItem;
 
     //CondfigFile
     public string ConfFileName = "ConfigData.csv";
     Dictionary<string, Item> Items = new Dictionary<string, Item>();
 
     private void Awake() {
+        
         ReadData();
+
+        RandomNumberGen.Initialize();
+        randomItem1 = new RandomItem(item.Length-1);
+
     }
     private void ReadData()
     {
@@ -53,7 +61,8 @@ public class ItemManager : MonoBehaviour
     }
 
     public void DropItem(Transform transform){
-        int randomItem = UnityEngine.Random.Range(0,item.Length);
+        //แก้
+        RandomDropItem();
 
         string className = item[randomItem].GetType().Name;
         float speed = 0;
@@ -107,5 +116,11 @@ public class ItemManager : MonoBehaviour
 
         
     
+    }
+
+    void RandomDropItem(){
+        RandomNumberGen.Initialize();
+        randomItem1.Random();
+        randomItem = randomItem1.GetItem;
     }
 }

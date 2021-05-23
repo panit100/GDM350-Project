@@ -1,1 +1,1 @@
-{"damage":5.0,"speed":5.0,"fireRate":0.5,"bulletNum":1,"bulletSpeed":20.0,"PlayerScale":{"x":1.0,"y":1.0},"LvDamage":1,"LvSpeed":1,"LvFireRate":1,"LvBulletNum":1,"LvBulletSpeed":1,"LvPlayerScale":1}
+{"damage":100.0,"speed":15.0,"fireRate":0.5,"bulletNum":3,"bulletSpeed":30.0,"PlayerScale":{"x":1.0,"y":1.0},"LvDamage":1,"LvSpeed":1,"LvFireRate":1,"LvBulletNum":1,"LvBulletSpeed":1,"LvPlayerScale":1,"LP":2}

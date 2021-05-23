@@ -11,21 +11,25 @@ public class Manager : MonoBehaviour
     public Text ShowText;
     public GameObject PauseMenu;
 
-
+    LevelItemUI levelItemUI;
     JsonManager jsonManager;
     int sceneIndex;
     Player player;
+
+    public GameObject PlayerPrefab;
     
     private void Start() {
         Time.timeScale = 1f;
 
-        player = FindObjectOfType<Player>().GetComponent<Player>();
+        
         jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
+        levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void Update() {
+
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(Time.timeScale == 0){
                 Time.timeScale = 1;
@@ -37,6 +41,11 @@ public class Manager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate() {
+        player = FindObjectOfType<Player>().GetComponent<Player>();
+    }
+
+//EventHandling
     public void isBossDie(){
 
         
@@ -48,8 +57,9 @@ public class Manager : MonoBehaviour
             StartCoroutine(GoNextStage());
     }
 
+//EventHandling
     public void isPlayerDead(){
-        if(player.isDead){
+        if(player.isDead && levelItemUI.LP <= 1){
             Time.timeScale = 0f;
 
             //delete save
@@ -61,6 +71,11 @@ public class Manager : MonoBehaviour
             if(player != null){
                 Destroy(player.gameObject);
             }
+        }else{
+            Destroy(player.gameObject);
+            levelItemUI.LP -= 1;
+            jsonManager.CreateJson();
+            GameObject Player = Instantiate(PlayerPrefab);
         }
     }
 

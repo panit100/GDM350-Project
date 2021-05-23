@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+//เพิ่ม LifePoint
+
 public class JsonManager : MonoBehaviour
 {
     //Json File;
@@ -23,12 +25,13 @@ public class JsonManager : MonoBehaviour
         public int LvBulletNum;
         public int LvBulletSpeed;
 		public int LvPlayerScale;
+		public int LP;
     }
     public PlayerData playerData;
     Player player;
 	LevelItemUI levelItemUI;
 
-    private void Start() {
+    private void FixedUpdate() {
         if(FindObjectOfType<Player>() != null){
             player = FindObjectOfType<Player>().GetComponent<Player>();
         }
@@ -56,6 +59,7 @@ public class JsonManager : MonoBehaviour
 			NewplayerData.LvBulletNum = levelItemUI.LvBulletNum;
 			NewplayerData.LvBulletSpeed = levelItemUI.LvBulletSpeed;
 			NewplayerData.LvPlayerScale = levelItemUI.LvPlayerScale;
+			NewplayerData.LP = levelItemUI.LP;
 
         }else{
             NewplayerData.damage = playerData.damage;
@@ -70,6 +74,7 @@ public class JsonManager : MonoBehaviour
 			NewplayerData.LvBulletNum = playerData.LvBulletNum;
 			NewplayerData.LvBulletSpeed = playerData.LvBulletSpeed;
 			NewplayerData.LvPlayerScale = playerData.LvPlayerScale;
+			NewplayerData.LP = playerData.LP;
         }
 		
 
