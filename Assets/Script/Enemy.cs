@@ -16,6 +16,8 @@ public class Enemy : Entity
         player = FindObjectOfType<Player>().GetComponent<Player>();
 
         weapons = GetComponentsInChildren<EnemyWeapon>();
+
+        AddDieListener();
     }
 
     public void Fire()

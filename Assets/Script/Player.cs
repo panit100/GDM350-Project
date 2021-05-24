@@ -30,6 +30,8 @@ public class Player : Entity
         
 		AssignJson();
         Invoke("EnableBoundaires",1);
+
+        AddDieListener();
     }
 
     private void Update() {
