@@ -14,6 +14,7 @@ public class Player : Entity
     public float speed = 5f;   //base  speed 5 Max 50
     public float fireRate = 1f; //base 0.5 Max 0.1
     float UndyingTime = 3f;
+    
 
     [Header("Bullet Stat")]
 

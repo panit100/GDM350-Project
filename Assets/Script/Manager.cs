@@ -24,6 +24,7 @@ public class Manager : MonoBehaviour
         
         jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
         levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
+        
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
@@ -48,13 +49,12 @@ public class Manager : MonoBehaviour
 //EventHandling
     public void isBossDie(){
 
-        
-            print("Do something Before Change Scene");
-            ShowText.gameObject.SetActive(true);
-            jsonManager.CreateJson();
-            PlayerPrefs.SetInt("ContinueScene",sceneIndex+1);
-            PlayerPrefs.Save();
-            StartCoroutine(GoNextStage());
+        StartCoroutine(InvokeSave());
+        print("Do something Before Change Scene");
+        ShowText.gameObject.SetActive(true);
+        PlayerPrefs.SetInt("ContinueScene",sceneIndex+1);
+        PlayerPrefs.Save();
+        StartCoroutine(GoNextStage());
     }
 
 //EventHandling
@@ -86,6 +86,7 @@ public class Manager : MonoBehaviour
                     //End game
                     PlayerPrefs.DeleteKey("ContinueScene");
                     print("END GAME");
+                    
         }else{
                     //save;
                     //PlayerPref key int ContinueScene
@@ -93,6 +94,11 @@ public class Manager : MonoBehaviour
                     SceneManager.LoadScene(sceneIndex+1);
                     print("Change Scene");
         }
+    }
+
+    public IEnumerator InvokeSave(){
+        yield return new WaitForSeconds(2.5f);
+        jsonManager.CreateJson();
     }
 
     

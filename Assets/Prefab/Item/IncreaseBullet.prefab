@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 77161101289695230}
   - component: {fileID: 2757715728544924359}
   m_Layer: 0
-  m_Name: ItemBulletNum
+  m_Name: IncreaseBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26,10 +26,12 @@ public class JsonManager : MonoBehaviour
         public int LvBulletSpeed;
 		public int LvPlayerScale;
 		public int LP;
+		public int Score;
     }
     public PlayerData playerData;
     Player player;
 	LevelItemUI levelItemUI;
+	
 
     private void FixedUpdate() {
         if(FindObjectOfType<Player>() != null){
@@ -60,6 +62,7 @@ public class JsonManager : MonoBehaviour
 			NewplayerData.LvBulletSpeed = levelItemUI.LvBulletSpeed;
 			NewplayerData.LvPlayerScale = levelItemUI.LvPlayerScale;
 			NewplayerData.LP = levelItemUI.LP;
+			NewplayerData.Score = levelItemUI.Score;
 
         }else{
             NewplayerData.damage = playerData.damage;
@@ -75,6 +78,7 @@ public class JsonManager : MonoBehaviour
 			NewplayerData.LvBulletSpeed = playerData.LvBulletSpeed;
 			NewplayerData.LvPlayerScale = playerData.LvPlayerScale;
 			NewplayerData.LP = playerData.LP;
+			NewplayerData.Score = playerData.Score;
         }
 		
 

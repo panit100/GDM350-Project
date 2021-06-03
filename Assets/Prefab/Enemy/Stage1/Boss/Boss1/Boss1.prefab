@@ -215,3 +215,4 @@ MonoBehaviour:
   hitPoint: 300
   shield: 0
   isDead: 0
+  gettingScore: 100

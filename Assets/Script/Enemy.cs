@@ -10,10 +10,14 @@ public class Enemy : Entity
 
     Player player;
     EnemyWeapon[] weapons;
+    LevelItemUI levelItemUI;
+
+    public int gettingScore;
 
 
     private void Start() {
         player = FindObjectOfType<Player>().GetComponent<Player>();
+        levelItemUI = FindObjectOfType<LevelItemUI>().GetComponent<LevelItemUI>();
 
         weapons = GetComponentsInChildren<EnemyWeapon>();
 
@@ -72,6 +76,7 @@ public class Enemy : Entity
 
     public override void Die()
     {
+        levelItemUI.Score += gettingScore;
         DestroyEnemy();
         base.Die();
     }

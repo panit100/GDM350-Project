@@ -13,6 +13,7 @@ public class LevelItemUI : MonoBehaviour
     public int LvBulletSpeed;
 	public int LvPlayerScale;
     public int LP;
+    public int Score;
 
     public Text TextLvDamage;
     public Text TextLvSpeed;
@@ -21,6 +22,7 @@ public class LevelItemUI : MonoBehaviour
     public Text TextLvBulletSpeed;
 	public Text TextLvPlayerScale;
     public Text TextLP;
+    public Text TextScore;
 
     private void Start() {
         jsonManager = FindObjectOfType<JsonManager>().GetComponent<JsonManager>();
@@ -41,6 +43,7 @@ public class LevelItemUI : MonoBehaviour
         LvBulletSpeed = jsonManager.playerData.LvBulletSpeed;
         LvPlayerScale = jsonManager.playerData.LvPlayerScale;
         LP = jsonManager.playerData.LP;
+        Score = jsonManager.playerData.Score;
     }
 
     void UpdateText(){
@@ -51,6 +54,7 @@ public class LevelItemUI : MonoBehaviour
         TextLvBulletSpeed.text = "LV " + LvBulletSpeed;
         TextLvPlayerScale.text = "LV " + LvPlayerScale;
         TextLP.text = "LP " + LP;
+        TextScore.text = "Score : " + Score + " ";
 
         if(LvSpeed >= 9){
             TextLvSpeed.text = "LV Max";

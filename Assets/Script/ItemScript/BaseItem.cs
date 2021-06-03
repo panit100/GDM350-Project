@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseItem : MonoBehaviour
 {
+    ShowItemManager showItemManager;
     float timeBeforeDestroy = 10f;
     float timer = 0;
 
@@ -17,6 +18,7 @@ public class BaseItem : MonoBehaviour
     public bool shield = false;
 
     private void Start() {
+        showItemManager = FindObjectOfType<ShowItemManager>().GetComponent<ShowItemManager>();
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.velocity = RandomVector();    
     }
@@ -34,6 +36,7 @@ public class BaseItem : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
             Ability();
+            showItemManager.AddItem(this.name);
             DestroyItem();
         }
     }

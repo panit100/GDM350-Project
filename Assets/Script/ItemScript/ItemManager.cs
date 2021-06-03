@@ -111,7 +111,8 @@ public class ItemManager : MonoBehaviour
 
         int randomDrop = UnityEngine.Random.Range(0,100);
         if(randomDrop <= ItemData.DropRate){
-            Instantiate(item[randomItem],transform.position,item[randomItem].transform.rotation);
+            BaseItem newitem = Instantiate(item[randomItem],transform.position,item[randomItem].transform.rotation) as BaseItem;
+            newitem.gameObject.name = newitem.gameObject.name.Replace("(Clone)","");
         }
 
         

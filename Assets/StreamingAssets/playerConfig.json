@@ -11,6 +11,7 @@
     "LvBulletNum" : 1,
     "LvBulletSpeed" : 1,
     "LvPlayerScale" : 1,
-    "LP" : 3
+    "LP" : 3,
+    "Score" : 0
    
 }

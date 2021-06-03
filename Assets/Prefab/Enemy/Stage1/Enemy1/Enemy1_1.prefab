@@ -150,6 +150,7 @@ MonoBehaviour:
   hitPoint: 1
   shield: 0
   isDead: 0
+  gettingScore: 5
 --- !u!61 &5792626810481035362
 BoxCollider2D:
   m_ObjectHideFlags: 0

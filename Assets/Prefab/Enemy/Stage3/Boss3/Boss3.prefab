@@ -189,6 +189,7 @@ MonoBehaviour:
   hitPoint: 1500
   shield: 0
   isDead: 0
+  gettingScore: 100
 --- !u!58 &5854434409373005855
 CircleCollider2D:
   m_ObjectHideFlags: 0
