@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
+    [Header("Score")]
+    int Score1 = 0;
+    int Score2 = 0;
+    int Score3 = 0;
+
     [Header("UI")]
     public Button restart;
     public Text ShowText;
@@ -61,6 +66,8 @@ public class Manager : MonoBehaviour
     public void isPlayerDead(){
         if(player.isDead && levelItemUI.LP <= 1){
             Time.timeScale = 0f;
+            //Save Score
+            SavingScore();
 
             //delete save
             PlayerPrefs.DeleteKey("ContinueScene");
@@ -84,6 +91,11 @@ public class Manager : MonoBehaviour
 
         if(sceneIndex == SceneManager.sceneCountInBuildSettings-1){
                     //End game
+
+                    //Save Score
+                    SavingScore();
+                    
+                    //Delete CheckPoint
                     PlayerPrefs.DeleteKey("ContinueScene");
                     print("END GAME");
                     
@@ -101,5 +113,32 @@ public class Manager : MonoBehaviour
         jsonManager.CreateJson();
     }
 
+
+    void SavingScore(){
+        LoadScore();
+        UpdateScore();
+    }
+
+    void LoadScore(){
+        Score1 = PlayerPrefs.GetInt("Score1",0);
+        Score2 = PlayerPrefs.GetInt("Score2",0);
+        Score3 = PlayerPrefs.GetInt("Score3",0); 
+    }
+    void UpdateScore(){
+        int LastRoundScore = levelItemUI.Score;
+
+        if(LastRoundScore > Score1){
+            PlayerPrefs.SetInt("Score3",Score2);
+            PlayerPrefs.SetInt("Score2",Score1);
+            PlayerPrefs.SetInt("Score1",LastRoundScore);
+            return;
+        }else if(LastRoundScore > Score2){
+            PlayerPrefs.SetInt("Score3",Score2);
+            PlayerPrefs.SetInt("Score2",LastRoundScore);
+            return;
+        }else if(LastRoundScore > Score3){
+            PlayerPrefs.SetInt("Score3",LastRoundScore);
+        }
+    }
     
 }
