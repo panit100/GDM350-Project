@@ -26,7 +26,7 @@ public class ItemManager : MonoBehaviour
     private void ReadData()
     {
         StreamReader input = null;
-        string path = "Assets/StreamingAssets";
+        string path = Application.dataPath + "/StreamingAssets";
         try
         {
             input = File.OpenText(Path.Combine(path,
