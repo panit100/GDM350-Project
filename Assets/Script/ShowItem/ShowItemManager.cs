@@ -8,6 +8,8 @@ public class ShowItemManager : MonoBehaviour
     public RectTransform parent;
     OrderIntArray array = new OrderIntArray();
     public List<Text> lastItemText = new List<Text>();
+
+    //ทำงานเมื่อผู้เล่นเก็บ Item
     public void AddItem(string item){
         array.Add(item);
         UpdateText();

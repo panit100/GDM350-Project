@@ -108,15 +108,12 @@ public class ItemManager : MonoBehaviour
         item[randomItem].bulletSpeed = ItemData.BulletSpeed;
         item[randomItem].scale = ItemData.Scale;
         item[randomItem].shield = ItemData.Shiled;
+        
 
-        int randomDrop = UnityEngine.Random.Range(0,100);
-        if(randomDrop <= ItemData.DropRate){
+        if(randomItem1.DropChance(ItemData.DropRate)){
             BaseItem newitem = Instantiate(item[randomItem],transform.position,item[randomItem].transform.rotation) as BaseItem;
             newitem.gameObject.name = newitem.gameObject.name.Replace("(Clone)","");
         }
-
-        
-    
     }
 
     void RandomDropItem(){

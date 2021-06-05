@@ -28,7 +28,6 @@ public class Player : Entity
 
         shield = true;
 
-        
 		AssignJson();
         Invoke("EnableBoundaires",1);
 
